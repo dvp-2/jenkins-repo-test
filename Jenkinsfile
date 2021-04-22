@@ -4,7 +4,15 @@ pipeline {
             image 'ubuntu'
             args '-t -d'
  stages {
-  stage('Docker Build and Tag') {
+    stage('Git branch to be committed') {
+           steps {
+              git branch: '*/*', url: 'https://github.com/dvp-2/jenkins-repo-test.git'
+                //sh 'ls -al > testing1.txt' 
+               // sh 'docker tag nginxtest:8 dvp1/nginx-jenkins:8'
+               
+          }
+        }
+     stage('Docker Build and Tag') {
            steps {
               
                 sh 'ls -al > testing1.txt' 
