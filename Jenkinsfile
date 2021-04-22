@@ -1,16 +1,19 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'ubuntu'
+            args '-t -d'
  stages {
   stage('Docker Build and Tag') {
            steps {
               
-                sh 'docker build -t nginxtest:8 .' 
-                sh 'docker tag nginxtest:8 dvp1/nginx-jenkins:8'
+                sh 'ls -al > testing1.txt' 
+               // sh 'docker tag nginxtest:8 dvp1/nginx-jenkins:8'
                
           }
         }
      
-  stage('Publish image to Docker Hub') {
+ /* stage('Publish image to Docker Hub') {
           
             steps {
           withDockerRegistry([ credentialsId: "dockerhubcred", url: "" ]) {
@@ -27,7 +30,7 @@ pipeline {
                 sh "docker run -d -p 3001:80 nginxtest:8"
  
             }
-        }
+        }  */
  
     }
 }
